@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>生成琥珀色 TabBar 图标</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            background: #EEC362;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #D4A540;
+        }
+        .instructions {
+            background: #fff8e1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-size: 14px;
+            line-height: 1.6;
+            border-left: 4px solid #EEC362;
+        }
+        .preview {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .preview-item {
+            text-align: center;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+        .preview-item canvas {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+        }
+        .preview-item p {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+        #output {
+            margin-top: 20px;
+        }
+        .success {
+            color: #2e7d32;
+            font-weight: bold;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #66BB6A;
+        }
+        .color-info {
+            text-align: center;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .color-box {
+            display: inline-block;
+            width: 50px;
+            height: 30px;
+            background: #EEC362;
+            border: 2px solid #ddd;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 琥珀色 TabBar 图标生成器</h1>
+
+        <div class="color-info">
+            当前主题色：#EEC362 <span class="color-box"></span>
+        </div>
+
+        <div class="instructions">
+            <strong>📋 使用说明：</strong><br>
+            1. 点击下面的按钮生成对应的图标<br>
+            2. 图标会自动下载为 PNG 文件<br>
+            3. 将下载的文件移动到项目目录：<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<code>/Users/liuliyi/code/uni-app-test/src/static/tabbar/</code><br>
+            4. 替换原有的 <code>home-active.png</code> 和 <code>profile-active.png</code><br>
+            5. 重新编译项目即可看到效果
+        </div>
+
+        <div class="button-group">
+            <button onclick="generateHomeIcon()">🏠 生成首页选中图标</button>
+            <button onclick="generateProfileIcon()">👤 生成我的选中图标</button>
+            <button onclick="generateAllIcons()">🎯 一键生成所有图标</button>
+        </div>
+
+        <div class="preview">
+            <div class="preview-item">
+                <canvas id="homeCanvas" width="90" height="90"></canvas>
+                <p>首页图标预览</p>
+            </div>
+            <div class="preview-item">
+                <canvas id="profileCanvas" width="90" height="90"></canvas>
+                <p>我的图标预览</p>
+            </div>
+        </div>
+
+        <div id="output"></div>
+    </div>
+
+    <script>
+        const AMBER_COLOR = '#EEC362';
+        const ICON_SIZE = 90;
+        const ICON_PADDING = 10;
+
+        // 绘制首页图标（房子）
+        function drawHomeIcon(ctx) {
+            ctx.clearRect(0, 0, ICON_SIZE, ICON_SIZE);
+            ctx.fillStyle = AMBER_COLOR;
+
+            // 房子主体
+            const centerX = ICON_SIZE / 2;
+            const centerY = ICON_SIZE / 2;
+            const scale = 0.7;
+
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.scale(scale, scale);
+
+            // 屋顶
+            ctx.beginPath();
+            ctx.moveTo(0, -30);
+            ctx.lineTo(-30, 0);
+            ctx.lineTo(30, 0);
+            ctx.closePath();
+            ctx.fill();
+
+            // 房子主体
+            ctx.fillRect(-25, 0, 50, 35);
+
+            // 门
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(-8, 10, 16, 25);
+
+            ctx.restore();
+        }
+
+        // 绘制我的图标（人物）
+        function drawProfileIcon(ctx) {
+            ctx.clearRect(0, 0, ICON_SIZE, ICON_SIZE);
+            ctx.fillStyle = AMBER_COLOR;
+
+            const centerX = ICON_SIZE / 2;
+            const centerY = ICON_SIZE / 2;
+            const scale = 0.8;
+
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.scale(scale, scale);
+
+            // 头部
+            ctx.beginPath();
+            ctx.arc(0, -15, 12, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 身体
+            ctx.beginPath();
+            ctx.arc(0, 18, 22, Math.PI, 0);
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        function generateHomeIcon() {
+            const canvas = document.getElementById('homeCanvas');
+            const ctx = canvas.getContext('2d');
+            drawHomeIcon(ctx);
+            downloadCanvas(canvas, 'home-active.png');
+            showMessage('✅ home-active.png 已生成！<br>📁 请保存到：src/static/tabbar/');
+        }
+
+        function generateProfileIcon() {
+            const canvas = document.getElementById('profileCanvas');
+            const ctx = canvas.getContext('2d');
+            drawProfileIcon(ctx);
+            downloadCanvas(canvas, 'profile-active.png');
+            showMessage('✅ profile-active.png 已生成！<br>📁 请保存到：src/static/tabbar/');
+        }
+
+        function generateAllIcons() {
+            generateHomeIcon();
+            setTimeout(() => {
+                generateProfileIcon();
+            }, 500);
+        }
+
+        function downloadCanvas(canvas, filename) {
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.download = filename;
+                link.href = url;
+                link.click();
+                URL.revokeObjectURL(url);
+            }, 'image/png');
+        }
+
+        function showMessage(message) {
+            const output = document.getElementById('output');
+            output.innerHTML = '<div class="success">' + message + '</div>';
+        }
+
+        // 初始化预览
+        window.onload = function() {
+            const homeCanvas = document.getElementById('homeCanvas');
+            const homeCtx = homeCanvas.getContext('2d');
+            drawHomeIcon(homeCtx);
+
+            const profileCanvas = document.getElementById('profileCanvas');
+            const profileCtx = profileCanvas.getContext('2d');
+            drawProfileIcon(profileCtx);
+        };
+    </script>
+</body>
+</html>

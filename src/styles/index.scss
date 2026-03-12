@@ -1,0 +1,296 @@
+/**
+ * 全局样式变量
+ */
+$primary-color: #007aff;
+$success-color: #4cd964;
+$warning-color: #f0ad4e;
+$error-color: #dd524d;
+
+$text-color: #333;
+$text-color-secondary: #666;
+$text-color-placeholder: #999;
+
+$border-color: #e5e5e5;
+$bg-color: #f5f5f5;
+$bg-color-white: #ffffff;
+
+/**
+ * 通用样式类
+ */
+
+/* 文本省略 */
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ellipsis-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 文本对齐 */
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* 字体大小 */
+.text-xs {
+  font-size: 20rpx;
+}
+
+.text-sm {
+  font-size: 24rpx;
+}
+
+.text-base {
+  font-size: 28rpx;
+}
+
+.text-lg {
+  font-size: 32rpx;
+}
+
+.text-xl {
+  font-size: 36rpx;
+}
+
+.text-2xl {
+  font-size: 40rpx;
+}
+
+/* 字体粗细 */
+.font-normal {
+  font-weight: normal;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+/* 文本颜色 */
+.text-primary {
+  color: $primary-color;
+}
+
+.text-success {
+  color: $success-color;
+}
+
+.text-warning {
+  color: $warning-color;
+}
+
+.text-error {
+  color: $error-color;
+}
+
+.text-secondary {
+  color: $text-color-secondary;
+}
+
+.text-placeholder {
+  color: $text-color-placeholder;
+}
+
+/* 间距 */
+.m-0 {
+  margin: 0;
+}
+
+.m-1 {
+  margin: 10rpx;
+}
+
+.m-2 {
+  margin: 20rpx;
+}
+
+.m-3 {
+  margin: 30rpx;
+}
+
+.mt-1 {
+  margin-top: 10rpx;
+}
+
+.mt-2 {
+  margin-top: 20rpx;
+}
+
+.mt-3 {
+  margin-top: 30rpx;
+}
+
+.mb-1 {
+  margin-bottom: 10rpx;
+}
+
+.mb-2 {
+  margin-bottom: 20rpx;
+}
+
+.mb-3 {
+  margin-bottom: 30rpx;
+}
+
+.ml-1 {
+  margin-left: 10rpx;
+}
+
+.ml-2 {
+  margin-left: 20rpx;
+}
+
+.mr-1 {
+  margin-right: 10rpx;
+}
+
+.mr-2 {
+  margin-right: 20rpx;
+}
+
+.p-1 {
+  padding: 10rpx;
+}
+
+.p-2 {
+  padding: 20rpx;
+}
+
+.p-3 {
+  padding: 30rpx;
+}
+
+/* 弹性布局 */
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+/* 显示 */
+.hidden {
+  display: none;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+/* 圆角 */
+.rounded {
+  border-radius: 8rpx;
+}
+
+.rounded-lg {
+  border-radius: 16rpx;
+}
+
+.rounded-full {
+  border-radius: 999rpx;
+}
+
+/* 阴影 */
+.shadow {
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.shadow-lg {
+  box-shadow: 0 8rpx 16rpx rgba(0, 0, 0, 0.15);
+}
+
+/* 定位 */
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+}
+
+/* 宽高 */
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+/* 溢出 */
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-scroll {
+  overflow: scroll;
+}

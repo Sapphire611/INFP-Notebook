@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TabBar 图标 - 右键另存为</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 40px;
+      font-size: 16px;
+    }
+    .instructions {
+      background: #f0f9eb;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 40px;
+      border-left: 4px solid #66bb6a;
+    }
+    .instructions h3 {
+      color: #66bb6a;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    .instructions ol {
+      margin-left: 20px;
+      color: #555;
+      line-height: 1.8;
+    }
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    .icon-item {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .icon-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .icon-item h3 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    .icon-item p {
+      color: #999;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+    canvas {
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    canvas:hover {
+      border-color: #66bb6a;
+    }
+    .footer {
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #e0e0e0;
+    }
+    code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Consolas', monospace;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📱 TabBar 图标生成器</h1>
+    <p class="subtitle">右键点击图标 → "图片另存为" → 保存到项目</p>
+
+    <div class="instructions">
+      <h3>📋 使用说明</h3>
+      <ol>
+        <li>右键点击下方的图标</li>
+        <li>选择 <strong>"图片另存为"</strong> 或 <strong>"Save Image As"</strong></li>
+        <li>保存到项目的 <code>src/static/tabbar/</code> 目录</li>
+        <li>文件名必须与下方显示的名称一致</li>
+        <li>保存完成后重新编译项目即可</li>
+      </ol>
+    </div>
+
+    <div class="icon-grid">
+      <div class="icon-item">
+        <h3>home.png</h3>
+        <canvas id="home" width="81" height="81" title="右键另存为 home.png"></canvas>
+        <p>首页图标（未选中）</p>
+      </div>
+
+      <div class="icon-item">
+        <h3>home-active.png</h3>
+        <canvas id="home-active" width="81" height="81" title="右键另存为 home-active.png"></canvas>
+        <p>首页图标（选中）</p>
+      </div>
+
+      <div class="icon-item">
+        <h3>profile.png</h3>
+        <canvas id="profile" width="81" height="81" title="右键另存为 profile.png"></canvas>
+        <p>我的图标（未选中）</p>
+      </div>
+
+      <div class="icon-item">
+        <h3>profile-active.png</h3>
+        <canvas id="profile-active" width="81" height="81" title="右键另存为 profile-active.png"></canvas>
+        <p>我的图标（选中）</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>💡 提示：uni-app 的 tabBar 必须使用图片格式，不能直接使用图标字体</p>
+    </div>
+  </div>
+
+  <script>
+    // 绘制首页图标
+    function drawHome(ctx, color) {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+
+      // 房子主体
+      ctx.beginPath();
+      ctx.moveTo(20, 45);
+      ctx.lineTo(40.5, 25);
+      ctx.lineTo(61, 45);
+      ctx.lineTo(61, 60);
+      ctx.lineTo(20, 60);
+      ctx.closePath();
+      ctx.stroke();
+
+      // 门
+      ctx.beginPath();
+      ctx.rect(35, 45, 11, 15);
+      ctx.stroke();
+    }
+
+    // 绘制个人图标
+    function drawProfile(ctx, color) {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+
+      // 头部
+      ctx.beginPath();
+      ctx.arc(40.5, 30, 10, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // 身体
+      ctx.beginPath();
+      ctx.arc(40.5, 65, 18, Math.PI, 0);
+      ctx.stroke();
+    }
+
+    // 生成图标
+    function generateIcons() {
+      // home.png - 灰色
+      const homeCanvas = document.getElementById('home');
+      const homeCtx = homeCanvas.getContext('2d');
+      homeCtx.clearRect(0, 0, 81, 81);
+      drawHome(homeCtx, '#999999');
+
+      // home-active.png - 绿色
+      const homeActiveCanvas = document.getElementById('home-active');
+      const homeActiveCtx = homeActiveCanvas.getContext('2d');
+      homeActiveCtx.clearRect(0, 0, 81, 81);
+      drawHome(homeActiveCtx, '#66bb6a');
+
+      // profile.png - 灰色
+      const profileCanvas = document.getElementById('profile');
+      const profileCtx = profileCanvas.getContext('2d');
+      profileCtx.clearRect(0, 0, 81, 81);
+      drawProfile(profileCtx, '#999999');
+
+      // profile-active.png - 绿色
+      const profileActiveCanvas = document.getElementById('profile-active');
+      const profileActiveCtx = profileActiveCanvas.getContext('2d');
+      profileActiveCtx.clearRect(0, 0, 81, 81);
+      drawProfile(profileActiveCtx, '#66bb6a');
+    }
+
+    // 页面加载时生成图标
+    window.onload = function() {
+      generateIcons();
+
+      // 添加点击提示
+      const canvases = document.querySelectorAll('canvas');
+      canvases.forEach(canvas => {
+        canvas.addEventListener('click', function() {
+          alert('请右键点击图标，选择"图片另存为"');
+        });
+      });
+    };
+  </script>
+</body>
+</html>
