@@ -2,7 +2,6 @@
   "miniprogramRoot": "dist/dev/mp-weixin/",
   "cloudfunctionRoot": "cloudfunctions/",
   "projectname": "infp-uni-app",
-  "appid": "REMOVED_APP_ID",
   "cloudbaseRoot": "./",
   "setting": {
     "urlCheck": false,
