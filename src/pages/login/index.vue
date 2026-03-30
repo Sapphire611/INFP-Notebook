@@ -76,6 +76,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/user'
+import { wechatLoginApi } from '@/api/wechat'
 
 const userStore = useUserStore()
 const isLoading = ref(false)
@@ -96,24 +97,29 @@ const handleWechatLogin = async () => {
   try {
     isLoading.value = true
 
-    // 调用云函数登录
-    const res = await uni.cloud.callFunction({
-      name: 'login',
-      data: {}
+    // 获取微信登录 code
+    const loginRes = await uni.login({
+      provider: 'weixin'
     })
 
-    console.log('云函数登录结果:', res)
+    console.log('微信登录 code:', loginRes.code)
 
-    if (res.result && res.result.success) {
-      const { userInfo } = res.result
+    if (!loginRes.code) {
+      throw new Error('获取微信登录码失败')
+    }
 
-      // 使用 userStore 保存用户信息（同时更新 store 和本地存储）
-      userStore.login({
-        openid: userInfo.openid,
-        nickName: userInfo.nickName || 'INFP 用户',
-        avatarUrl: userInfo.avatarUrl || '',
-        mbti: userInfo.mbti || ''
-      })
+    // 调用后端 API 进行登录，通过后端与微信服务器交互获取 openid
+    const result = await wechatLoginApi.login(
+      loginRes.code,
+      'INFP 用户', // 默认昵称，用户可以在后续页面修改
+      '' // 默认头像
+    )
+
+    console.log('登录结果:', result)
+
+    if (result.success && result.userInfo) {
+      // 使用 userStore 保存用户信息
+      await userStore.login(result.userInfo)
 
       uni.showToast({
         title: '登录成功',
@@ -122,20 +128,13 @@ const handleWechatLogin = async () => {
 
       // 延迟跳转
       setTimeout(() => {
-        // 如果是第一次登录（没有昵称），跳转到资料完善页面
-        if (!userInfo.nickName || userInfo.nickName === '新用户') {
-          uni.redirectTo({
-            url: '/pages/profile-edit/index'
-          })
-        } else {
-          // 否则跳转到"我的"页面
-          uni.switchTab({
-            url: '/pages/profile/index'
-          })
-        }
+        // 跳转到资料完善页面
+        uni.redirectTo({
+          url: '/pages/profile-edit/index'
+        })
       }, 500)
     } else {
-      throw new Error(res.result?.error || '登录失败')
+      throw new Error(result.error || '登录失败')
     }
   } catch (error: any) {
     console.error('微信登录失败:', error)

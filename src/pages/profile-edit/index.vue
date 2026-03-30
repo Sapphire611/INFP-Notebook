@@ -85,6 +85,7 @@
 import { ref } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 import { useUserStore } from '@/stores/user'
+import { wechatAuthApi } from '@/api/supabase'
 
 const userStore = useUserStore()
 const nickName = ref('')
@@ -140,25 +141,25 @@ const handleSave = async () => {
     isSubmitting.value = true
 
     // 获取当前用户信息
-    const userInfo = uni.getStorageSync('userInfo') || {}
+    const userInfo = userStore.userInfo
+    if (!userInfo || !userInfo.openid) {
+      throw new Error('用户未登录')
+    }
 
-    // 调用云函数更新用户信息
-    const res = await uni.cloud.callFunction({
-      name: 'updateProfile',
-      data: {
-        nickName: nickName.value.trim(),
-        avatarUrl: avatarUrl.value
-      }
+    // 调用 Supabase API 更新用户信息
+    const result = await wechatAuthApi.updateProfile(userInfo.openid, {
+      nickName: nickName.value.trim(),
+      avatarUrl: avatarUrl.value
     })
 
-    console.log('更新用户信息结果:', res)
+    console.log('更新用户信息结果:', result)
 
-    if (res.result && res.result.success) {
+    if (result.success && result.userInfo) {
       // 使用 userStore 更新用户信息（同时更新 store 和本地存储）
-      userStore.login({
+      await userStore.login({
         ...userInfo,
-        nickName: nickName.value.trim(),
-        avatarUrl: avatarUrl.value
+        nickName: result.userInfo.nickName,
+        avatarUrl: result.userInfo.avatarUrl
       })
 
       uni.showToast({
@@ -173,7 +174,7 @@ const handleSave = async () => {
         })
       }, 1500)
     } else {
-      const errorMsg = res.result?.error || '更新失败'
+      const errorMsg = result.error || '更新失败'
       throw new Error(errorMsg)
     }
   } catch (error: any) {

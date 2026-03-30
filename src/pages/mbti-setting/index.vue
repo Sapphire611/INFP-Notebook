@@ -72,6 +72,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/user'
+import { wechatAuthApi } from '@/api/supabase'
 
 const userStore = useUserStore()
 
@@ -126,22 +127,25 @@ const handleSave = async () => {
   try {
     isSubmitting.value = true
 
-    // 调用云函数更新 MBTI
-    const res = await uni.cloud.callFunction({
-      name: 'updateProfile',
-      data: {
-        mbti: selectedMbti.value
-      }
+    // 获取当前用户信息
+    const currentUserInfo = userStore.userInfo
+    if (!currentUserInfo || !currentUserInfo.openid) {
+      throw new Error('用户未登录')
+    }
+
+    // 调用 Supabase API 更新 MBTI
+    // 注意：这里我们将 mbti 信息存储在 profile_name 字段中，或者你可以在数据库中添加专门的 mbti 字段
+    const result = await wechatAuthApi.updateProfile(currentUserInfo.openid, {
+      mbti: selectedMbti.value
     })
 
-    console.log('云函数调用结果:', res)
+    console.log('更新 MBTI 结果:', result)
 
-    const result = res.result as any
-    if (result && result.success) {
+    if (result.success) {
       // 使用 userStore 更新用户信息（同时更新 store 和本地存储）
-      userStore.login({
-        ...userInfo.value,
-        ...result.userInfo
+      await userStore.login({
+        ...currentUserInfo,
+        mbti: selectedMbti.value
       })
 
       uni.showToast({
