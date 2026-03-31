@@ -1,8 +1,8 @@
-import { WECHAT_API_ENDPOINTS } from '@/config/api'
+import { supabase } from "@/lib/supabase";
 
 /**
  * 微信登录 API
- * 调用 INFP-cms 后端 API 进行微信登录
+ * 通过 Supabase Edge Function 进行微信登录
  */
 export const wechatLoginApi = {
   /**
@@ -13,42 +13,38 @@ export const wechatLoginApi = {
    */
   async login(code: string, nickName?: string, avatarUrl?: string) {
     try {
-      const response = await uni.request({
-        url: WECHAT_API_ENDPOINTS.LOGIN,
-        method: 'POST',
-        header: {
-          'Content-Type': 'application/json'
-        },
-        data: {
+      // 调用 Supabase Edge Function
+      const { data, error } = await supabase.functions.invoke("wechat-login", {
+        body: {
           code,
           nickName,
-          avatarUrl
-        }
-      })
+          avatarUrl,
+          appNumber: import.meta.env.VITE_APP_NUMBER || "1",
+        },
+      });
 
-      console.log('微信登录 API 响应:', response)
+      console.log("微信登录 Edge Function 响应:", data, error);
 
-      // 检查 HTTP 状态码
-      if (response.statusCode !== 200) {
-        throw new Error(`HTTP ${response.statusCode}: ${response.data?.error || '请求失败'}`)
+      if (error) {
+        throw new Error(error.message || "登录失败");
       }
 
-      const result = response.data as any
+      const result = data as any;
 
       if (result.success && result.userInfo) {
         return {
           success: true,
-          userInfo: result.userInfo
-        }
+          userInfo: result.userInfo,
+        };
       } else {
-        throw new Error(result.error || '登录失败')
+        throw new Error(result.error || "登录失败");
       }
     } catch (error: any) {
-      console.error('微信登录失败:', error)
+      console.error("微信登录失败:", error);
       return {
         success: false,
-        error: error.message || '登录失败，请重试'
-      }
+        error: error.message || "登录失败，请重试",
+      };
     }
-  }
-}
+  },
+};

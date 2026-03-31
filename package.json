@@ -29,7 +29,7 @@
     "@dcloudio/uni-mp-xhs": "3.0.0-4020920240930001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4020920240930001",
     "@dcloudio/uni-ui": "^1.5.5",
-    "@supabase/supabase-js": "^2.100.0",
+    "@supabase/supabase-js": "^2.39.8",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "vue": "^3.4.21"

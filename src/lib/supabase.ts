@@ -1,37 +1,251 @@
-import { createClient } from '@supabase/supabase-js'
+/**
+ * Supabase HTTP 客户端
+ * 用于微信小程序环境（不使用官方 SDK）
+ */
 
-// 从环境变量获取 Supabase 配置
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
-
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables')
-}
+const SUPABASE_URL = 'https://lwkeudywhmvlimsasixo.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx3a2V1ZHl3aG12bGltc2FzaXhvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1MTIxNDksImV4cCI6MjA3OTA4ODE0OX0.O9tTR16ybNPWvh_4RY0_I43zbvVqaR75TFhN1vgn5jg'
 
 /**
- * 创建 Supabase 客户端
- * 用于小程序端的数据库操作
+ * 调用 Supabase Edge Function
  */
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    // 小程序环境的特殊配置
-    storage: {
-      getItem: (key: string) => {
-        return uni.getStorageSync(key) || null
-      },
-      setItem: (key: string, value: string) => {
-        uni.setStorageSync(key, value)
-      },
-      removeItem: (key: string) => {
-        uni.removeStorageSync(key)
+export const supabase = {
+  functions: {
+    invoke: async (functionName: string, options: { body?: any } = {}) => {
+      const url = `${SUPABASE_URL}/functions/v1/${functionName}`
+
+      console.log('调用 Edge Function:', url, options)
+
+      try {
+        const response = await uni.request({
+          url,
+          method: 'POST',
+          header: {
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          data: options.body || {}
+        })
+
+        console.log('响应状态:', response.statusCode)
+        console.log('响应数据:', response.data)
+
+        // 微信小程序返回格式：response = { statusCode, data, headers }
+        if (response.statusCode && response.statusCode >= 400) {
+          console.error('请求失败:', response.data)
+          return {
+            data: null,
+            error: response.data?.error || response.data?.message || `HTTP ${response.statusCode}`
+          }
+        }
+
+        return { data: response.data, error: null }
+      } catch (err: any) {
+        console.error('请求异常:', err)
+        return { data: null, error: err.message || '请求失败' }
       }
-    },
-    // 小程序中不使用自动刷新 token
-    autoRefreshToken: false,
-    persistSession: true,
-    detectSessionInUrl: false
+    }
+  },
+
+  // 从数据库查询数据 - 支持链式调用
+  from: (table: string) => {
+    // 查询构建器
+    const queryBuilder = {
+      _filters: [] as string[],
+      _select: '*' as string,
+
+      select(columns = '*') {
+        this._select = columns
+        return this
+      },
+
+      eq(column: string, value: any) {
+        this._filters.push(`${column}=eq.${encodeURIComponent(value)}`)
+        return this
+      },
+
+      single() {
+        return this
+      },
+
+      // 执行查询
+      async _executeQuery() {
+        let url = `${SUPABASE_URL}/rest/v1/${table}?select=${this._select}`
+        if (this._filters.length > 0) {
+          url += '&' + this._filters.join('&')
+        }
+
+        try {
+          const response = await uni.request({
+            url,
+            method: 'GET',
+            header: {
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              'apikey': SUPABASE_ANON_KEY
+            }
+          })
+
+          if (response.statusCode && response.statusCode >= 400) {
+            return { data: null, error: response.data }
+          }
+
+          // 如果调用了 single()，返回单个对象而不是数组
+          const data = Array.isArray(response.data) && response.data.length === 1
+            ? response.data[0]
+            : response.data
+
+          return { data, error: null }
+        } catch (err: any) {
+          return { data: null, error: { message: err.message } }
+        }
+      },
+
+      // 更新数据
+      async update(data: any) {
+        let url = `${SUPABASE_URL}/rest/v1/${table}`
+        if (this._filters.length > 0) {
+          url += '?' + this._filters.join('&')
+        }
+
+        try {
+          const response = await uni.request({
+            url,
+            method: 'PATCH',
+            header: {
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              'apikey': SUPABASE_ANON_KEY,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=representation'
+            },
+            data
+          })
+
+          if (response.statusCode && response.statusCode >= 400) {
+            return { data: null, error: response.data }
+          }
+
+          return { data: response.data, error: null }
+        } catch (err: any) {
+          return { data: null, error: { message: err.message } }
+        }
+      },
+
+      // 插入数据
+      async insert(data: any) {
+        const url = `${SUPABASE_URL}/rest/v1/${table}`
+
+        try {
+          const response = await uni.request({
+            url,
+            method: 'POST',
+            header: {
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              'apikey': SUPABASE_ANON_KEY,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=representation'
+            },
+            data
+          })
+
+          if (response.statusCode && response.statusCode >= 400) {
+            return { data: null, error: response.data }
+          }
+
+          return { data: response.data, error: null }
+        } catch (err: any) {
+          return { data: null, error: { message: err.message } }
+        }
+      }
+    }
+
+    // 返回支持链式调用的对象
+    return {
+      select: (columns = '*') => {
+        queryBuilder._select = columns
+        return {
+          eq: (column: string, value: any) => {
+            queryBuilder.eq(column, value)
+            return {
+              single: () => queryBuilder._executeQuery()
+            }
+          },
+          single: () => queryBuilder._executeQuery()
+        }
+      },
+      update: (data: any) => {
+        return {
+          eq: (column: string, value: any) => {
+            queryBuilder.eq(column, value)
+            return {
+              select: () => ({
+                single: async () => {
+                  let url = `${SUPABASE_URL}/rest/v1/${table}?${queryBuilder._filters.join('&')}`
+
+                  try {
+                    const response = await uni.request({
+                      url,
+                      method: 'PATCH',
+                      header: {
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=representation'
+                      },
+                      data
+                    })
+
+                    if (response.statusCode && response.statusCode >= 400) {
+                      return { data: null, error: response.data }
+                    }
+
+                    const resultData = Array.isArray(response.data) ? response.data[0] : response.data
+                    return { data: resultData, error: null }
+                  } catch (err: any) {
+                    return { data: null, error: { message: err.message } }
+                  }
+                }
+              })
+            }
+          }
+        }
+      },
+      insert: (data: any) => {
+        return {
+          select: () => ({
+            single: async () => {
+              const url = `${SUPABASE_URL}/rest/v1/${table}`
+
+              try {
+                const response = await uni.request({
+                  url,
+                  method: 'POST',
+                  header: {
+                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                    'apikey': SUPABASE_ANON_KEY,
+                    'Content-Type': 'application/json',
+                    'Prefer': 'return=representation'
+                  },
+                  data
+                })
+
+                if (response.statusCode && response.statusCode >= 400) {
+                  return { data: null, error: response.data }
+                }
+
+                const resultData = Array.isArray(response.data) ? response.data[0] : response.data
+                return { data: resultData, error: null }
+              } catch (err: any) {
+                return { data: null, error: { message: err.message } }
+              }
+            }
+          })
+        }
+      }
+    }
   }
-})
+}
+
+console.log('✅ Supabase HTTP 客户端已初始化')
 
 /**
  * 微信用户类型定义

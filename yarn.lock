@@ -1394,10 +1394,10 @@
     terser "^5.4.0"
     unplugin-auto-import "^0.16.7"
 
-"@esbuild/darwin-arm64@0.20.2":
+"@esbuild/win32-x64@0.20.2":
   version "0.20.2"
-  resolved "https://registry.npmmirror.com/@esbuild/darwin-arm64/-/darwin-arm64-0.20.2.tgz"
-  integrity sha512-4J6IRT+10J3aJH3l1yzEg9y3wkTDgDk7TSDFX+wKFiWjqWp/iCfLIYzGyasx9l0SAFPT1HwSCR+0w/h1ES/MjA==
+  resolved "https://registry.npmmirror.com/@esbuild/win32-x64/-/win32-x64-0.20.2.tgz"
+  integrity sha512-N49X4lJX27+l9jbLKSqZ6bKNjzQvHaT8IIFUy+YIqmXQdjYCToGWwOItDrfby14c78aDd5NHQl29xingXfCdLQ==
 
 "@intlify/core-base@9.1.9":
   version "9.1.9"
@@ -2023,10 +2023,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@parcel/watcher-darwin-arm64@2.5.6":
+"@parcel/watcher-win32-x64@2.5.6":
   version "2.5.6"
-  resolved "https://registry.npmmirror.com/@parcel/watcher-darwin-arm64/-/watcher-darwin-arm64-2.5.6.tgz"
-  integrity sha512-Z2ZdrnwyXvvvdtRHLmM4knydIdU9adO3D4n/0cVipF3rRiwP+3/sfzpAwA/qKFL6i1ModaabkU7IbpeMBgiVEA==
+  resolved "https://registry.npmmirror.com/@parcel/watcher-win32-x64/-/watcher-win32-x64-2.5.6.tgz"
+  integrity sha512-hbQlYcCq5dlAX9Qx+kFb0FHue6vbjlf0FrNzSKdYK2APUf7tGfGxQCk2ihEREmbR6ZMc0MVAD5RIX/41gpUzTw==
 
 "@parcel/watcher@^2.4.1":
   version "2.5.6"
@@ -2061,10 +2061,15 @@
     estree-walker "^2.0.2"
     picomatch "^4.0.2"
 
-"@rollup/rollup-darwin-arm64@4.59.0":
+"@rollup/rollup-win32-x64-gnu@4.59.0":
   version "4.59.0"
-  resolved "https://registry.npmmirror.com/@rollup/rollup-darwin-arm64/-/rollup-darwin-arm64-4.59.0.tgz"
-  integrity sha512-W2Psnbh1J8ZJw0xKAd8zdNgF9HRLkdWwwdWqubSVk0pUuQkoHnv7rx4GiF9rT4t5DIZGAsConRE3AxCdJ4m8rg==
+  resolved "https://registry.npmmirror.com/@rollup/rollup-win32-x64-gnu/-/rollup-win32-x64-gnu-4.59.0.tgz"
+  integrity sha512-laBkYlSS1n2L8fSo1thDNGrCTQMmxjYY5G0WFWjFFYZkKPjsMBsgJfGf4TLxXrF6RyhI60L8TMOjBMvXiTcxeA==
+
+"@rollup/rollup-win32-x64-msvc@4.59.0":
+  version "4.59.0"
+  resolved "https://registry.npmmirror.com/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.59.0.tgz"
+  integrity sha512-2HRCml6OztYXyJXAvdDXPKcawukWY2GpR5/nxKp4iBgiO3wcoEGkAaqctIbZcNB6KlUQBIqt8VYkNSj2397EfA==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.6"
@@ -2080,60 +2085,62 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@supabase/auth-js@2.100.0":
-  version "2.100.0"
-  resolved "https://registry.npmmirror.com/@supabase/auth-js/-/auth-js-2.100.0.tgz"
-  integrity sha512-pdT3ye3UVRN1Cg0wom6BmyY+XTtp5DiJaYnPi6j8ht5i8Lq8kfqxJMJz9GI9YDKk3w1nhGOPnh6Qz5qpyYm+1w==
+"@supabase/functions-js@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.npmmirror.com/@supabase/functions-js/-/functions-js-2.1.5.tgz"
+  integrity sha512-BNzC5XhCzzCaggJ8s53DP+WeHHGT/NfTsx2wUSSGKR2/ikLFQTBCDzMvGz/PxYMqRko/LwncQtKXGOYp1PkPaw==
   dependencies:
-    tslib "2.8.1"
+    "@supabase/node-fetch" "^2.6.14"
 
-"@supabase/functions-js@2.100.0":
-  version "2.100.0"
-  resolved "https://registry.npmmirror.com/@supabase/functions-js/-/functions-js-2.100.0.tgz"
-  integrity sha512-keLg79RPwP+uiwHuxFPTFgDRxPV46LM4j/swjyR2GKJgWniTVSsgiBHfbIBDcrQwehLepy09b/9QSHUywtKRWQ==
+"@supabase/gotrue-js@2.62.2":
+  version "2.62.2"
+  resolved "https://registry.npmmirror.com/@supabase/gotrue-js/-/gotrue-js-2.62.2.tgz"
+  integrity sha512-AP6e6W9rQXFTEJ7sTTNYQrNf0LCcnt1hUW+RIgUK+Uh3jbWvcIST7wAlYyNZiMlS9+PYyymWQ+Ykz/rOYSO0+A==
   dependencies:
-    tslib "2.8.1"
+    "@supabase/node-fetch" "^2.6.14"
 
-"@supabase/phoenix@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.npmmirror.com/@supabase/phoenix/-/phoenix-0.4.0.tgz"
-  integrity sha512-RHSx8bHS02xwfHdAbX5Lpbo6PXbgyf7lTaXTlwtFDPwOIw64NnVRwFAXGojHhjtVYI+PEPNSWwkL90f4agN3bw==
-
-"@supabase/postgrest-js@2.100.0":
-  version "2.100.0"
-  resolved "https://registry.npmmirror.com/@supabase/postgrest-js/-/postgrest-js-2.100.0.tgz"
-  integrity sha512-xYNvNbBJaXOGcrZ44wxwp5830uo1okMHGS8h8dm3u4f0xcZ39yzbryUsubTJW41MG2gbL/6U57cA4Pi6YMZ9pA==
+"@supabase/node-fetch@^2.6.14", "@supabase/node-fetch@2.6.15":
+  version "2.6.15"
+  resolved "https://registry.npmmirror.com/@supabase/node-fetch/-/node-fetch-2.6.15.tgz"
+  integrity sha512-1ibVeYUacxWYi9i0cf5efil6adJ9WRyZBLivgjs+AUpewx1F3xPi7gLgaASI2SmIQxPoCEjAsLAzKPgMJVgOUQ==
   dependencies:
-    tslib "2.8.1"
+    whatwg-url "^5.0.0"
 
-"@supabase/realtime-js@2.100.0":
-  version "2.100.0"
-  resolved "https://registry.npmmirror.com/@supabase/realtime-js/-/realtime-js-2.100.0.tgz"
-  integrity sha512-2AZs00zzEF0HuCKY8grz5eCYlwEfVi5HONLZFoNR6aDfxQivl8zdQYNjyFoqN2MZiVhQHD7u6XV/xHwM8mCEHw==
+"@supabase/postgrest-js@1.9.2":
+  version "1.9.2"
+  resolved "https://registry.npmmirror.com/@supabase/postgrest-js/-/postgrest-js-1.9.2.tgz"
+  integrity sha512-I6yHo8CC9cxhOo6DouDMy9uOfW7hjdsnCxZiaJuIVZm1dBGTFiQPgfMa9zXCamEWzNyWRjZvupAUuX+tqcl5Sw==
   dependencies:
-    "@supabase/phoenix" "^0.4.0"
-    "@types/ws" "^8.18.1"
-    tslib "2.8.1"
-    ws "^8.18.2"
+    "@supabase/node-fetch" "^2.6.14"
 
-"@supabase/storage-js@2.100.0":
-  version "2.100.0"
-  resolved "https://registry.npmmirror.com/@supabase/storage-js/-/storage-js-2.100.0.tgz"
-  integrity sha512-d4EeuK6RNIgYNA2MU9kj8lQrLm5AzZ+WwpWjGkii6SADQNIGTC/uiaTRu02XJ5AmFALQfo8fLl9xuCkO6Xw+iQ==
+"@supabase/realtime-js@2.9.3":
+  version "2.9.3"
+  resolved "https://registry.npmmirror.com/@supabase/realtime-js/-/realtime-js-2.9.3.tgz"
+  integrity sha512-lAp50s2n3FhGJFq+wTSXLNIDPw5Y0Wxrgt44eM5nLSA3jZNUUP3Oq2Ccd1CbZdVntPCWLZvJaU//pAd2NE+QnQ==
   dependencies:
-    iceberg-js "^0.8.1"
-    tslib "2.8.1"
+    "@supabase/node-fetch" "^2.6.14"
+    "@types/phoenix" "^1.5.4"
+    "@types/ws" "^8.5.10"
+    ws "^8.14.2"
 
-"@supabase/supabase-js@^2.100.0":
-  version "2.100.0"
-  resolved "https://registry.npmmirror.com/@supabase/supabase-js/-/supabase-js-2.100.0.tgz"
-  integrity sha512-r0tlcukejJXJ1m/2eG/Ya5eYs4W8AC7oZfShpG3+SIo/eIU9uIt76ZeYI1SoUwUmcmzlAbgch+HDZDR/toVQPQ==
+"@supabase/storage-js@2.5.5":
+  version "2.5.5"
+  resolved "https://registry.npmmirror.com/@supabase/storage-js/-/storage-js-2.5.5.tgz"
+  integrity sha512-OpLoDRjFwClwc2cjTJZG8XviTiQH4Ik8sCiMK5v7et0MDu2QlXjCAW3ljxJB5+z/KazdMOTnySi+hysxWUPu3w==
   dependencies:
-    "@supabase/auth-js" "2.100.0"
-    "@supabase/functions-js" "2.100.0"
-    "@supabase/postgrest-js" "2.100.0"
-    "@supabase/realtime-js" "2.100.0"
-    "@supabase/storage-js" "2.100.0"
+    "@supabase/node-fetch" "^2.6.14"
+
+"@supabase/supabase-js@^2.39.8":
+  version "2.39.8"
+  resolved "https://registry.npmmirror.com/@supabase/supabase-js/-/supabase-js-2.39.8.tgz"
+  integrity sha512-WpiawHjseIRcCQTZbMJtHUSOepz5+M9qE1jP9BDmg8X7ehALFwgEkiKyHAu59qm/pKP2ryyQXLtu2XZNRbUarw==
+  dependencies:
+    "@supabase/functions-js" "2.1.5"
+    "@supabase/gotrue-js" "2.62.2"
+    "@supabase/node-fetch" "2.6.15"
+    "@supabase/postgrest-js" "1.9.2"
+    "@supabase/realtime-js" "2.9.3"
+    "@supabase/storage-js" "2.5.5"
 
 "@tootallnate/once@1":
   version "1.1.2"
@@ -2211,6 +2218,11 @@
   dependencies:
     undici-types "~6.21.0"
 
+"@types/phoenix@^1.5.4":
+  version "1.6.7"
+  resolved "https://registry.npmmirror.com/@types/phoenix/-/phoenix-1.6.7.tgz"
+  integrity sha512-oN9ive//QSBkf19rfDv45M7eZPi0eEXylht2OLEXicu5b4KoQ1OzXIw+xDSGWxSxe1JmepRR/ZH283vsu518/Q==
+
 "@types/prettier@^2.1.5":
   version "2.7.3"
   resolved "https://registry.npmmirror.com/@types/prettier/-/prettier-2.7.3.tgz"
@@ -2221,7 +2233,7 @@
   resolved "https://registry.npmmirror.com/@types/stack-utils/-/stack-utils-2.0.3.tgz"
   integrity sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==
 
-"@types/ws@^8.18.1":
+"@types/ws@^8.5.10":
   version "8.18.1"
   resolved "https://registry.npmmirror.com/@types/ws/-/ws-8.18.1.tgz"
   integrity sha512-ThVF6DCVhA8kUGy+aazFQ4kXQ7E1Ty7A3ypFOe0IcJV8O/M511G99AW24irKrW56Wt44yG9+ij8FaqoBGkuBXg==
@@ -3579,11 +3591,6 @@ fs.realpath@^1.0.0:
   resolved "https://registry.npmmirror.com/fs.realpath/-/fs.realpath-1.0.0.tgz"
   integrity sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==
 
-fsevents@^2.3.2, fsevents@~2.3.2, fsevents@~2.3.3:
-  version "2.3.3"
-  resolved "https://registry.npmmirror.com/fsevents/-/fsevents-2.3.3.tgz"
-  integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
-
 function-bind@^1.1.2:
   version "1.1.2"
   resolved "https://registry.npmmirror.com/function-bind/-/function-bind-1.1.2.tgz"
@@ -3755,11 +3762,6 @@ human-signals@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmmirror.com/human-signals/-/human-signals-2.1.0.tgz"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
-
-iceberg-js@^0.8.1:
-  version "0.8.1"
-  resolved "https://registry.npmmirror.com/iceberg-js/-/iceberg-js-0.8.1.tgz"
-  integrity sha512-1dhVQZXhcHje7798IVM+xoo/1ZdVfzOMIc8/rgVSijRK38EDqOJoGula9N/8ZI5RD8QTxNQtK/Gozpr+qUqRRA==
 
 iconv-lite@~0.4.24, iconv-lite@0.4.24:
   version "0.4.24"
@@ -5729,10 +5731,10 @@ tr46@^2.1.0:
   dependencies:
     punycode "^2.1.1"
 
-tslib@2.8.1:
-  version "2.8.1"
-  resolved "https://registry.npmmirror.com/tslib/-/tslib-2.8.1.tgz"
-  integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
+tr46@~0.0.3:
+  version "0.0.3"
+  resolved "https://registry.npmmirror.com/tr46/-/tr46-0.0.3.tgz"
+  integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
 
 type-detect@4.0.8:
   version "4.0.8"
@@ -5974,6 +5976,11 @@ walker@^1.0.7:
   dependencies:
     makeerror "1.0.12"
 
+webidl-conversions@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.npmmirror.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz"
+  integrity sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==
+
 webidl-conversions@^5.0.0:
   version "5.0.0"
   resolved "https://registry.npmmirror.com/webidl-conversions/-/webidl-conversions-5.0.0.tgz"
@@ -6000,6 +6007,14 @@ whatwg-mimetype@^2.3.0:
   version "2.3.0"
   resolved "https://registry.npmmirror.com/whatwg-mimetype/-/whatwg-mimetype-2.3.0.tgz"
   integrity sha512-M4yMwr6mAnQz76TbJm914+gPpB/nCwvZbJU28cUD6dR004SAxDLOOSUaB1JDRqLtaOV/vi0IC5lEAGFgrjGv/g==
+
+whatwg-url@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmmirror.com/whatwg-url/-/whatwg-url-5.0.0.tgz"
+  integrity sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==
+  dependencies:
+    tr46 "~0.0.3"
+    webidl-conversions "^3.0.0"
 
 whatwg-url@^8.0.0, whatwg-url@^8.5.0:
   version "8.7.0"
@@ -6046,7 +6061,7 @@ ws@^7.4.6:
   resolved "https://registry.npmmirror.com/ws/-/ws-7.5.10.tgz"
   integrity sha512-+dbF1tHwZpXcbOJdVOkzLDxZP1ailvSxM6ZweXTegylPny803bFhA+vqBYw4s31NSAk4S2Qz+AKXK9a4wkdjcQ==
 
-ws@^8.18.2, ws@^8.4.2:
+ws@^8.14.2, ws@^8.4.2:
   version "8.19.0"
   resolved "https://registry.npmmirror.com/ws/-/ws-8.19.0.tgz"
   integrity sha512-blAT2mjOEIi0ZzruJfIhb3nps74PRWTCz1IjglWEEpQl5XS/UNama6u2/rjFkDDouqr4L67ry+1aGIALViWjDg==
