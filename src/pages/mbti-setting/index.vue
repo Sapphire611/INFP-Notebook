@@ -207,16 +207,16 @@ const getMbtiColor = (mbti: string) => {
     'INFP': '#66BB6A',
     'ENFJ': '#66BB6A',
     'ENFP': '#66BB6A',
-    // SJ - 守护者（黄人）
-    'ISTJ': '#F39C12',
-    'ISFJ': '#F1C40F',
-    'ESTJ': '#F39C12',
-    'ESFJ': '#F1C40F',
-    // SP - 艺术创造者（蓝人）
-    'ISTP': '#3498DB',
-    'ISFP': '#2980B9',
-    'ESTP': '#3498DB',
-    'ESFP': '#2980B9'
+    // SJ - 守护者（蓝色）
+    'ISTJ': '#3498DB',
+    'ISFJ': '#2980B9',
+    'ESTJ': '#3498DB',
+    'ESFJ': '#2980B9',
+    // SP - 艺术创造者（黄色）
+    'ISTP': '#F39C12',
+    'ISFP': '#F1C40F',
+    'ESTP': '#F39C12',
+    'ESFP': '#F1C40F'
   }
   return colorMap[mbti] || '#66BB6A'
 }
@@ -233,16 +233,16 @@ const getMbtiSecondaryColor = (mbti: string) => {
     'INFP': '#86CC8A',
     'ENFJ': '#86CC8A',
     'ENFP': '#86CC8A',
-    // SJ - 守护者（黄人）
-    'ISTJ': '#F7B731',
-    'ISFJ': '#F4D03F',
-    'ESTJ': '#F7B731',
-    'ESFJ': '#F4D03F',
-    // SP - 艺术创造者（蓝人）
-    'ISTP': '#5DADE2',
-    'ISFP': '#5499C7',
-    'ESTP': '#5DADE2',
-    'ESFP': '#5499C7'
+    // SJ - 守护者（蓝色）
+    'ISTJ': '#5DADE2',
+    'ISFJ': '#5499C7',
+    'ESTJ': '#5DADE2',
+    'ESFJ': '#5499C7',
+    // SP - 艺术创造者（黄色）
+    'ISTP': '#F7B731',
+    'ISFP': '#F4D03F',
+    'ESTP': '#F7B731',
+    'ESFP': '#F4D03F'
   }
   return secondaryMap[mbti] || '#86CC8A'
 }
@@ -259,16 +259,16 @@ const getMbtiLightColor = (mbti: string) => {
     'INFP': '#F0F9EB',
     'ENFJ': '#F0F9EB',
     'ENFP': '#F0F9EB',
-    // SJ - 守护者（黄人）
-    'ISTJ': '#FEF9E7',
-    'ISFJ': '#FEF5E7',
-    'ESTJ': '#FEF9E7',
-    'ESFJ': '#FEF5E7',
-    // SP - 艺术创造者（蓝人）
-    'ISTP': '#EBF5FB',
-    'ISFP': '#E8F6F3',
-    'ESTP': '#EBF5FB',
-    'ESFP': '#E8F6F3'
+    // SJ - 守护者（蓝色）
+    'ISTJ': '#EBF5FB',
+    'ISFJ': '#E8F6F3',
+    'ESTJ': '#EBF5FB',
+    'ESFJ': '#E8F6F3',
+    // SP - 艺术创造者（黄色）
+    'ISTP': '#FEF9E7',
+    'ISFP': '#FEF5E7',
+    'ESTP': '#FEF9E7',
+    'ESFP': '#FEF5E7'
   }
   return lightMap[mbti] || '#F0F9EB'
 }
@@ -286,8 +286,8 @@ const getMbtiLightColor = (mbti: string) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 40rpx 30rpx 20rpx;
-  padding-top: calc(40rpx + env(safe-area-inset-top));
+  padding: 20rpx 30rpx 20rpx;
+  padding-top: calc(20rpx + env(safe-area-inset-top));
   background: #ffffff;
   box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
 
@@ -358,7 +358,7 @@ const getMbtiLightColor = (mbti: string) => {
 
 .mbti-list {
   flex: 1;
-  height: 0;
+  min-height: 0;
   margin-bottom: 40rpx;
 
   .mbti-item {

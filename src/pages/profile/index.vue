@@ -251,8 +251,8 @@ const getMbtiColor = (mbti: string) => {
   width: 100%;
   box-sizing: border-box;
   background: linear-gradient(135deg, #EEC362 0%, #FFD54F 100%);
-  padding: 40rpx 60rpx 30rpx;
-  padding-top: calc(40rpx + env(safe-area-inset-top));
+  padding: 20rpx 60rpx 15rpx;
+  padding-top: calc(20rpx + env(safe-area-inset-top));
   box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
 

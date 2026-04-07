@@ -34,6 +34,20 @@
         "navigationBarTitleText": "MBTI设置",
         "navigationStyle": "custom"
       }
+    },
+    {
+      "path": "pages/anniversary-detail/index",
+      "style": {
+        "navigationBarTitleText": "纪念日详情",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/anniversary-form/index",
+      "style": {
+        "navigationBarTitleText": "添加纪念日",
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {

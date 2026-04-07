@@ -240,6 +240,39 @@ export const supabase = {
             }
           })
         }
+      },
+      delete: () => {
+        const filters: string[] = []
+        return {
+          eq: (column: string, value: any) => {
+            filters.push(`${column}=eq.${encodeURIComponent(value)}`)
+            return {
+              async execute() {
+                let url = `${SUPABASE_URL}/rest/v1/${table}`
+                if (filters.length > 0) {
+                  url += '?' + filters.join('&')
+                }
+                try {
+                  const response = await uni.request({
+                    url,
+                    method: 'DELETE',
+                    header: {
+                      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                      'apikey': SUPABASE_ANON_KEY,
+                      'Prefer': 'return=minimal'
+                    }
+                  })
+                  if (response.statusCode && response.statusCode >= 400) {
+                    return { error: response.data }
+                  }
+                  return { error: null }
+                } catch (err: any) {
+                  return { error: { message: err.message } }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

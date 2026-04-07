@@ -86,6 +86,7 @@ import { ref } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 import { useUserStore } from '@/stores/user'
 import { wechatAuthApi } from '@/api/supabase'
+import { uploadFileToStorage } from '@/utils/storage'
 
 const userStore = useUserStore()
 const nickName = ref('')
@@ -111,17 +112,28 @@ const handleBack = () => {
 }
 
 /**
- * 选择头像
+ * 选择头像 - 上传到 Supabase Storage
  */
-const handleChooseAvatar = (e: any) => {
-  const { avatarUrl: newAvatarUrl } = e.detail
-  if (newAvatarUrl) {
-    avatarUrl.value = newAvatarUrl
-    uni.showToast({
-      title: '头像已选择',
-      icon: 'success'
-    })
+const handleChooseAvatar = async (e: any) => {
+  const tmpUrl = e.detail.avatarUrl
+  if (!tmpUrl) return
+
+  // 已经是 Supabase 公共 URL，直接使用
+  if (!tmpUrl.startsWith('http://tmp/') && !tmpUrl.startsWith('wxfile://')) {
+    avatarUrl.value = tmpUrl
+    return
   }
+
+  uni.showLoading({ title: '上传头像中...' })
+  const { url, error } = await uploadFileToStorage(tmpUrl)
+  uni.hideLoading()
+
+  if (error) {
+    uni.showToast({ title: '头像上传失败', icon: 'none' })
+    return
+  }
+
+  avatarUrl.value = url
 }
 
 /**
@@ -202,7 +214,7 @@ const handleSave = async () => {
   align-items: center;
   justify-content: space-between;
   padding: 40rpx 30rpx 30rpx;
-  padding-top: calc(40rpx + env(safe-area-inset-top));
+  padding-top: calc(20rpx + env(safe-area-inset-top));
   box-sizing: border-box;
 
   .nav-back {
