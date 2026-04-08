@@ -37,7 +37,7 @@
               </text>
             </view>
             <view class="user-info">
-              <text class="user-nickname">{{ userInfo?.nickName || 'INFP 用户' }}</text>
+              <text class="user-nickname">{{ userInfo?.nickName || '未设置昵称' }}</text>
               <view v-if="userInfo?.mbti" class="mbti-badge">
                 <text class="mbti-emoji">{{ getMbtiEmoji(userInfo.mbti) }}</text>
                 <text class="mbti-text">{{ userInfo.mbti }}</text>
@@ -190,20 +190,20 @@ const handleLogout = () => {
 const getMbtiEmoji = (mbti: string) => {
   const emojiMap: Record<string, string> = {
     'INTJ': '🏛️',
-    'INTP': '🔬',
+    'INTP': '🧪',
     'ENTJ': '👑',
-    'ENTP': '💡',
+    'ENTP': '😈',
     'INFJ': '🔮',
-    'INFP': '📒',
-    'ENFJ': '🌟',
-    'ENFP': '✨',
+    'INFP': '🦋',
+    'ENFJ': '🗡',
+    'ENFP': '🐶',
     'ISTJ': '📋',
-    'ISFJ': '🛡️',
-    'ESTJ': '🎯',
+    'ISFJ': '🧑‍⚕️',
+    'ESTJ': '📏',
     'ESFJ': '🤝',
     'ISTP': '🔧',
     'ISFP': '🎨',
-    'ESTP': '🎮',
+    'ESTP': '🕶️',
     'ESFP': '🎭'
   }
   return emojiMap[mbti] || '🧠'

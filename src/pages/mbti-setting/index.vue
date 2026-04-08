@@ -176,20 +176,20 @@ const handleSave = async () => {
 const getMbtiEmoji = (mbti: string) => {
   const emojiMap: Record<string, string> = {
     'INTJ': '🏛️',
-    'INTP': '🔬',
+    'INTP': '🧪',
     'ENTJ': '👑',
-    'ENTP': '💡',
+    'ENTP': '😈',
     'INFJ': '🔮',
-    'INFP': '📒',
-    'ENFJ': '🌟',
-    'ENFP': '✨',
+    'INFP': '🦋',
+    'ENFJ': '🗡',
+    'ENFP': '🐶',
     'ISTJ': '📋',
-    'ISFJ': '🛡️',
-    'ESTJ': '🎯',
+    'ISFJ': '🧑‍⚕️',
+    'ESTJ': '📏',
     'ESFJ': '🤝',
     'ISTP': '🔧',
     'ISFP': '🎨',
-    'ESTP': '🎮',
+    'ESTP': '🕶️',
     'ESFP': '🎭'
   }
   return emojiMap[mbti] || '🧠'

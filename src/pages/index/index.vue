@@ -16,7 +16,7 @@
     </view>
 
     <!-- 未登录 -->
-    <view v-else-if="!userStore.userInfo.id" class="empty-area">
+    <view v-else-if="!userStore.userInfo?.id" class="empty-area">
       <text class="empty-emoji">🔐</text>
       <text class="empty-title">请先登录</text>
       <text class="empty-desc">登录后可以创建和查看纪念日</text>
@@ -75,7 +75,7 @@
     </scroll-view>
 
     <!-- 右下角添加按钮（登录后显示） -->
-    <view v-if="userStore.userInfo.id" class="fab" @click="goAdd">
+    <view v-if="userStore.userInfo?.id" class="fab" @click="goAdd">
       <text class="fab-icon">+</text>
     </view>
   </view>
@@ -93,7 +93,7 @@ const anniversaryStore = useAnniversaryStore()
 
 onShow(() => {
   userStore.loadUserInfo()
-  if (userStore.userInfo.id) {
+  if (userStore.userInfo?.id) {
     anniversaryStore.fetchList(userStore.userInfo.id)
   }
 })

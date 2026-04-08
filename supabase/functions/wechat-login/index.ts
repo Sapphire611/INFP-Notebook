@@ -176,7 +176,7 @@ serve(async (req) => {
         success: true,
         userInfo: {
           openid: userData.openid,
-          nickName: userData.wechat_nickname || "INFP 用户",
+          nickName: userData.wechat_nickname || "",
           avatarUrl: userData.wechat_avatar_url || "",
           mbti: userData.mbti || "",
           id: userData.id,

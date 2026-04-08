@@ -76,7 +76,7 @@ export const wechatAuthApi = {
         success: true,
         userInfo: {
           openid: userData.openid,
-          nickName: userData.wechat_nickname || 'INFP 用户',
+          nickName: userData.wechat_nickname || '',
           avatarUrl: userData.wechat_avatar_url || '',
           mbti: '', // mbti 字段可以根据需要扩展
           id: userData.id

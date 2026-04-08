@@ -63,12 +63,12 @@
       </view>
 
       <!-- 底部提示 -->
-      <view class="tips">
+      <!-- <view class="tips">
         <text class="tips-text">登录即代表同意</text>
         <text class="tips-link">用户协议</text>
         <text class="tips-text">和</text>
         <text class="tips-link">隐私政策</text>
-      </view>
+      </view> -->
     </view>
   </view>
 </template>
@@ -109,11 +109,7 @@ const handleWechatLogin = async () => {
     }
 
     // 调用后端 API 进行登录，通过后端与微信服务器交互获取 openid
-    const result = await wechatLoginApi.login(
-      loginRes.code,
-      'INFP 用户', // 默认昵称，用户可以在后续页面修改
-      '' // 默认头像
-    )
+    const result = await wechatLoginApi.login(loginRes.code)
 
     console.log('登录结果:', result)
 
@@ -126,11 +122,10 @@ const handleWechatLogin = async () => {
         icon: 'success'
       })
 
-      // 延迟跳转
+      // 延迟跳转回首页
       setTimeout(() => {
-        // 跳转到资料完善页面
-        uni.redirectTo({
-          url: '/pages/profile-edit/index'
+        uni.switchTab({
+          url: '/pages/index/index'
         })
       }, 500)
     } else {
